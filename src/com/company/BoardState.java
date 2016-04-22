@@ -37,28 +37,42 @@ public class BoardState {
 
             row = (choice - 1) / 3;
             col = (choice + 2) % 3;
-            System.out.println(row);
-            System.out.println(col);
+//            System.out.println(row);
+//            System.out.println(col);
             board[row][col]='x';
-
-            //test for victory conditions
-
-            for (int i=0;i<board.length;i++){
-                if (board[i][0] =='x'){
-                    if (board[i][1] =='x'){
-                        if (board[i][2] =='x') System.out.println("Victory! Player 1 (x) wins!");
-                    }
-                }
-            }
-            for (int i=0;i<board.length;i++){
-                if (board[0][i] == 'x'){
-                    if (board[1][i] == 'x'){
-                        if (board[2][i] =='x') System.out.println("Victory! Player 1 (x) wins!");
-                    }
-                }
-            }
-
+            checkForVictory();
         }
 
+    }
+
+    private static void checkForVictory() {
+        //test for victory conditions
+        //rows
+        for (int i=0;i<board.length;i++){
+            if (board[i][0] =='x'){
+                if (board[i][1] =='x'){
+                    if (board[i][2] =='x') System.out.println("Victory! Player 1 (x) wins!");
+                }
+            }
+        }
+        //columns
+        for (int i=0;i<board.length;i++){
+            if (board[0][i] == 'x'){
+                if (board[1][i] == 'x'){
+                    if (board[2][i] =='x') System.out.println("Victory! Player 1 (x) wins!");
+                }
+            }
+        }
+        //diagonals
+        if (board[0][0] =='x'){
+            if (board[1][1] =='x'){
+                if (board[2][2]=='x') System.out.println("Victory! Player 1 (x) wins!");
+            }
+        }
+        if (board[2][0] =='x'){
+            if (board[1][1] =='x'){
+                if (board[0][2]=='x') System.out.println("Victory! Player 1 (x) wins!");
+            }
+        }
     }
 }
