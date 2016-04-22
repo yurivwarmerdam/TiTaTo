@@ -23,6 +23,9 @@ public class Main {
         BoardState.turn();
         BoardState.turn();
         BoardState.turn();
+        BoardState.turn();
+        BoardState.turn();
+        BoardState.turn();
 
 
 //

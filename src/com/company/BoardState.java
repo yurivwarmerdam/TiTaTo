@@ -8,6 +8,7 @@ public class BoardState {
     public static int choice;
     public static int row;
     public static int col;
+    public static char currentPlayer;
     static Scanner move = new Scanner(System.in);
 
 //board = new int[3][3];
@@ -27,11 +28,17 @@ public class BoardState {
     }
 
     public static void  turn(){
-        if (turnCount % 2 == 0) {
+        if (turnCount % 2 ==0){
+            currentPlayer = 'x';
+        }
+        else{
+            currentPlayer = 'o';
+        }
+
             BoardState.state();
             //player selects a square and it is filled in
             System.out.println();
-            System.out.println("Player1 (x) make a move");
+            System.out.println("Player "+currentPlayer+" make a move");
             System.out.println("Select your position:");
             choice = move.nextInt();
 
@@ -39,40 +46,42 @@ public class BoardState {
             col = (choice + 2) % 3;
 //            System.out.println(row);
 //            System.out.println(col);
-            board[row][col]='x';
+            board[row][col]=currentPlayer;
             checkForVictory();
-        }
-
+            turnCount++;
     }
 
     private static void checkForVictory() {
         //test for victory conditions
         //rows
         for (int i=0;i<board.length;i++){
-            if (board[i][0] =='x'){
-                if (board[i][1] =='x'){
-                    if (board[i][2] =='x') System.out.println("Victory! Player 1 (x) wins!");
+            if (board[i][0] ==currentPlayer){
+                if (board[i][1] ==currentPlayer){
+                    if (board[i][2] ==currentPlayer) System.out.println("Victory! Player "+currentPlayer+" wins!");
                 }
             }
         }
         //columns
         for (int i=0;i<board.length;i++){
-            if (board[0][i] == 'x'){
-                if (board[1][i] == 'x'){
-                    if (board[2][i] =='x') System.out.println("Victory! Player 1 (x) wins!");
+            if (board[0][i] == currentPlayer){
+                if (board[1][i] == currentPlayer){
+                    if (board[2][i] ==currentPlayer) System.out.println("Victory! Player "+currentPlayer+" wins!");
                 }
             }
         }
         //diagonals
-        if (board[0][0] =='x'){
-            if (board[1][1] =='x'){
-                if (board[2][2]=='x') System.out.println("Victory! Player 1 (x) wins!");
+        if (board[0][0] ==currentPlayer){
+            if (board[1][1] ==currentPlayer){
+                if (board[2][2]==currentPlayer) System.out.println("Victory! Player "+currentPlayer+" wins!");
             }
         }
-        if (board[2][0] =='x'){
-            if (board[1][1] =='x'){
-                if (board[0][2]=='x') System.out.println("Victory! Player 1 (x) wins!");
+        if (board[2][0] ==currentPlayer){
+            if (board[1][1] ==currentPlayer){
+                if (board[0][2]==currentPlayer) System.out.println("Victory! Player "+currentPlayer+" wins!");
             }
         }
     }
+
+
+
 }
