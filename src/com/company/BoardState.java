@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BoardState {
@@ -40,7 +41,18 @@ public class BoardState {
             System.out.println();
             System.out.println("Player "+currentPlayer+" make a move");
             System.out.println("Select your position:");
-            choice = move.nextInt();
+
+            while (!move.hasNextInt()) {
+                System.out.println("Real mature. A number between 1 and 9 is not hard to come up with, Dickhead.");
+                move.nextLine();
+            }
+                choice = move.nextInt();
+
+            while (choice>9 || choice<1){
+                System.out.println("stop being clever, asshole. Try again:");
+                choice = move.nextInt();
+            }
+
 
             row = (choice - 1) / 3;
             col = (choice + 2) % 3;
