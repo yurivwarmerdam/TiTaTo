@@ -43,7 +43,8 @@ public class BoardState {
             System.out.println("Select your position:");
 
             while (!move.hasNextInt()) {
-                System.out.println("Real mature. A number between 1 and 9 is not hard to come up with, Dickhead.");
+                System.out.println();
+                //System.out.println("Real mature. A number between 1 and 9 is not hard to come up with, Dickhead.");
                 move.nextLine();
             }
                 choice = move.nextInt();
