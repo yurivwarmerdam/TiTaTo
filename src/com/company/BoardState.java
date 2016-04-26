@@ -1,11 +1,12 @@
 package com.company;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BoardState {
     public static char[][] board = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
     public static int turnCount = 0;
-    public static int choice;
+    public static int choice = -1;
     public static int row;
     public static int col;
     public static char currentPlayer;
@@ -39,16 +40,49 @@ public class BoardState {
             //player selects a square and it is filled in
             System.out.println();
             System.out.println("Player "+currentPlayer+" make a move");
-            System.out.println("Select your position:");
-            choice = move.nextInt();
+
+            while (choice>9 || choice<1 || !(board[(choice-1)/3][(choice+2)%3] ==' ')){
+                if (choice==-1){
+
+                }
+                else if (choice>9){
+                    System.out.println("integer too large.");
+                }
+                else if (choice<1){
+                    System.out.println("integer too small");
+                }
+                else if (!(board[(choice-1)/3][(choice+2)%3] ==' ')){
+                    System.out.println("That position has already been chosen");
+                }
+                System.out.println("Select your position:");
+                choice = getInteger();
+            }
 
             row = (choice - 1) / 3;
             col = (choice + 2) % 3;
 //            System.out.println(row);
 //            System.out.println(col);
+//            while (!(board[row][col] == ' ')){
+//                System.out.println("Oh great, you're trying to cheat by overriding another move. Try again.");
+//                choice =move.nextInt();
+//                row = (choice - 1) / 3;
+//                col = (choice + 2) % 3;
+//            }
             board[row][col]=currentPlayer;
             checkForVictory();
+
             turnCount++;
+    }
+
+    private static int getInteger() {
+        int checkedInt;
+        while (!move.hasNextInt()) {
+            System.out.println();
+            System.out.println("Real mature. A number between 1 and 9 is not hard to come up with, Dickhead.");
+            move.nextLine();
+        }
+        checkedInt = move.nextInt();
+        return checkedInt;
     }
 
     private static void checkForVictory() {
@@ -81,7 +115,6 @@ public class BoardState {
             }
         }
     }
-
 
 
 }
