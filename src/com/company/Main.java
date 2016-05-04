@@ -20,17 +20,12 @@ public class Main {
     System.out.println(testBoard[0][0] == 'x');
 
         //testing for the annoyance engine(tm)
-        Annoyance annoyed1 = new Annoyance();
 
+        Annoyance annoyed1 = new Annoyance();
+        BoardState game = new BoardState();
         //testing for the tic tac toe game
 
-        BoardState.turn();
-        BoardState.turn();
-        BoardState.turn();
-        BoardState.turn();
-        BoardState.turn();
-        BoardState.turn();
-
+        game.turn();
 
 //
 //        System.out.println("Player1 (x) make a move");
