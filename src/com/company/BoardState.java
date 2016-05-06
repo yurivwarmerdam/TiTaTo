@@ -1,16 +1,15 @@
 package com.company;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BoardState {
-    public static char[][] board = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
-    public static int turnCount = 0;
-    public static int choice = -1;
-    public static int row;
-    public static int col;
-    public static char currentPlayer;
-    static Scanner move = new Scanner(System.in);
+    public char[][] board = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
+    public int turnCount = 0;
+    public int choice = -1;
+    public int row;
+    public int col;
+    public char currentPlayer;
+    Scanner move = new Scanner(System.in);
 
 //board = new int[3][3];
 
@@ -18,7 +17,7 @@ public class BoardState {
         return board;
     }
 
-    public static void state() {
+    public void state() {
         System.out.println("The current board state is:");
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -28,7 +27,7 @@ public class BoardState {
         }
     }
 
-    public static void  turn(){
+    public void  turn(){
         if (turnCount % 2 ==0){
             currentPlayer = 'x';
         }
@@ -36,11 +35,11 @@ public class BoardState {
             currentPlayer = 'o';
         }
 
-            BoardState.state();
+            this.state();
             //player selects a square and it is filled in
             System.out.println();
             System.out.println("Player "+currentPlayer+" make a move");
-
+            choice=-1;
             while (choice>9 || choice<1 || !(board[(choice-1)/3][(choice+2)%3] ==' ')){
                 if (choice==-1){
 
@@ -58,8 +57,8 @@ public class BoardState {
                 choice = getInteger();
             }
 
-            row = (choice - 1) / 3;
-            col = (choice + 2) % 3;
+        row = (choice - 1) / 3;
+        col = (choice + 2) % 3;
 //            System.out.println(row);
 //            System.out.println(col);
 //            while (!(board[row][col] == ' ')){
@@ -68,13 +67,23 @@ public class BoardState {
 //                row = (choice - 1) / 3;
 //                col = (choice + 2) % 3;
 //            }
-            board[row][col]=currentPlayer;
-            checkForVictory();
+        board[row][col]=currentPlayer;
 
+        if (checkForVictory2()==true){
+            System.out.println("Congradulations! Player "+ currentPlayer+" has won!");
+        }else if (turnCount==8){
+            System.out.println("the game is a draw. Neither of you are smart enough to play a game that 5-year old kids can win 100% of the time.");
+        }else {
             turnCount++;
+            turn();
+        }
+
+        //checkForVictory();
+
+
     }
 
-    private static int getInteger() {
+    private int getInteger() {
         int checkedInt;
         while (!move.hasNextInt()) {
             System.out.println();
@@ -85,7 +94,7 @@ public class BoardState {
         return checkedInt;
     }
 
-    private static void checkForVictory() {
+    private void checkForVictory() {
         //test for victory conditions
         //rows
         for (int i=0;i<board.length;i++){
@@ -114,6 +123,38 @@ public class BoardState {
                 if (board[0][2]==currentPlayer) System.out.println("Victory! Player "+currentPlayer+" wins!");
             }
         }
+    }
+
+    private boolean checkForVictory2() {
+        //test for victory conditions
+        //rows
+        for (int i=0;i<board.length;i++){
+            if (board[i][0] ==currentPlayer){
+                if (board[i][1] ==currentPlayer){
+                    if (board[i][2] ==currentPlayer) return true;
+                }
+            }
+        }
+        //columns
+        for (int i=0;i<board.length;i++){
+            if (board[0][i] == currentPlayer){
+                if (board[1][i] == currentPlayer){
+                    if (board[2][i] ==currentPlayer) return true;
+                }
+            }
+        }
+        //diagonals
+        if (board[0][0] ==currentPlayer){
+            if (board[1][1] ==currentPlayer){
+                if (board[2][2]==currentPlayer) return true;
+            }
+        }
+        if (board[2][0] ==currentPlayer){
+            if (board[1][1] ==currentPlayer){
+                if (board[0][2]==currentPlayer) return true;
+            }
+        }
+        return false;
     }
 
 
