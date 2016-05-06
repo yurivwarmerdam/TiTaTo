@@ -39,7 +39,7 @@ public class BoardState {
             //player selects a square and it is filled in
             System.out.println();
             System.out.println("Player "+currentPlayer+" make a move");
-
+            choice=-1;
             while (choice>9 || choice<1 || !(board[(choice-1)/3][(choice+2)%3] ==' ')){
                 if (choice==-1){
 
