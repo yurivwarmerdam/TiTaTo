@@ -41,10 +41,10 @@ public class BoardState {
             System.out.println("Player "+currentPlayer+" make a move");
             choice=-1;
             while (choice>9 || choice<1 || !(board[(choice-1)/3][(choice+2)%3] ==' ')){
-                if (choice==-1){
-
-                }
-                else if (choice>9){
+//                if (choice==-1){
+//
+//                }
+                 if (choice>9){
                     System.out.println("integer too large.");
                 }
                 else if (choice<1){
@@ -91,6 +91,8 @@ public class BoardState {
             move.nextLine();
         }
         checkedInt = move.nextInt();
+        move.nextLine();
+        //The following line is to make sure that the "read head" is at an empty place.
         return checkedInt;
     }
 
